@@ -6,7 +6,10 @@
     "node": true
   },
   "rules": {
-    "semi": "off"
+    "semi": "off",
+    "require-jsdoc": "off",
+    "linebreak-style": "off",
+    "no-trailing-spaces": "off",
   },
   "extends": ["eslint:recommended", "google"]
 }
