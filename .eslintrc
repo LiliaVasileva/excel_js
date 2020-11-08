@@ -10,6 +10,7 @@
     "require-jsdoc": "off",
     "linebreak-style": "off",
     "no-trailing-spaces": "off",
+    "operator-linebreak": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
