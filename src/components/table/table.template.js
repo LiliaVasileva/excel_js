@@ -8,7 +8,12 @@ function toCell() {
 }
 
 function toColumn(col) {
-  return `<div class="column">${col}</div>`
+  return `
+    <div class="column">
+        ${col}
+        <div class="col-resize"></div>
+    </div>
+  `
 }
 
 function createRow(index, content) {
