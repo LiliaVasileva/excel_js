@@ -13,6 +13,7 @@ const jsLoaders = () => {
       loader: 'babel-loader',
       options: {
         presets: ['@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties'],
       },
     },
   ]
@@ -81,10 +82,10 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: isDev,
-              reloadAll: true,
-            },
+            // options: {
+            //   hmr: isDev,
+            //   // reloadAll: true,
+            // },
           },
           // Translates CSS into CommonJS
           'css-loader',
