@@ -17,9 +17,13 @@ function toColumn(col) {
 }
 
 function createRow(index, content) {
+  const resize = '<div class="row-resize"></div>'
   return `
     <div class="row">
-        <div class="row-info">${index? index : ''}</div>
+        <div class="row-info">
+            ${index? index : ''}
+            ${index? resize : ''}
+        </div>
         <div class="row-data">${content}</div>
     </div>
   `
