@@ -11,7 +11,8 @@
     "linebreak-style": "off",
     "no-trailing-spaces": "off",
     "operator-linebreak": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "no-debugger": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
