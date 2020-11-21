@@ -16,26 +16,27 @@ export class Table extends ExcelComponent {
   }
 
   onMousedown(event) {
-    if (event.target.dataset.resize) {
+    const resizer = event.target.dataset.resize
+    if (resizer) {
       const $resizer = $(event.target)
       const $parent = $resizer.closest('[data-type="resizable"]')
       const coordinates = $parent.getCoordinates()
 
-      if (event.target.dataset.resize === 'col') {
+      const colNumber = $parent.data.col
+      const cells = this.$root.findAll(`[data-col="${colNumber}"]`)
+
+      if (resizer === 'col') {
         document.onmousemove = e => {
-          const colNumber = $parent.data.col
           const delta = e.pageX - coordinates.right
           const value = coordinates.width + delta
-          $parent.$el.style.width = value + 'px'
-
-          document.querySelectorAll(`[data-col="${colNumber}"]`)
-              .forEach(el => el.style.width = value + 'px')
+          $parent.setCss({width: value + 'px'})
+          cells.forEach(el => $(el).setCss({width: value + 'px'}))
         }
-      } else if (event.target.dataset.resize === 'row') {
+      } else if (resizer === 'row') {
         document.onmousemove = e => {
           const delta = e.pageY - coordinates.bottom
-          // console.log(delta)
-          $parent.$el.style.height = (coordinates.height + delta) + 'px'
+          const value = coordinates.height + delta
+          $parent.setCss({height: value + 'px'})
         }
       }
 
