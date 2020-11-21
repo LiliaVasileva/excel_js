@@ -41,6 +41,37 @@ class Dom {
     }
     return this
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  getCoordinates() {
+    return this.$el.getBoundingClientRect()
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+
+  /*
+  * {
+  *   height: '30px',
+  *   weight: '42px',
+  *   backgroundColor: red
+  * }
+  * */
+  setCss(styles = {}) {
+    Object
+        .entries(styles)
+        .forEach(
+            ([param, value]) => this.$el.style[param] = value
+        )
+  }
+
+  get data() {
+    return this.$el.dataset
+  }
 }
 
 export function $(selector) {
