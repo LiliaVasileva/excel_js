@@ -28,6 +28,10 @@ class Dom {
     this.$el.removeEventListener(eventType, callback)
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector))
+  }
+
   append(node) {
     if (node instanceof Dom) {
       node = node.$el
@@ -67,6 +71,14 @@ class Dom {
         .forEach(
             ([param, value]) => this.$el.style[param] = value
         )
+  }
+
+  addCssClass(className) {
+    this.$el.classList.add(className)
+  }
+
+  removeCssClass(className) {
+    this.$el.classList.remove(className)
   }
 
   get data() {
