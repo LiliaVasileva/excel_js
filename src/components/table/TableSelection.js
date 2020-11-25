@@ -3,12 +3,14 @@ export class TableSelection {
 
   constructor() {
     this.group = []
+    this.current = null
   }
 
   // $el - instance of DOM
   select($el) {
     this.clear()
     this.group.push($el)
+    this.current = $el
     $el.addCssClass(TableSelection.className)
   }
 
@@ -17,7 +19,9 @@ export class TableSelection {
     this.group = []
   }
 
-  selectGroup() {
-
+  selectGroup($group = []) {
+    this.clear()
+    this.group = $group
+    this.group.forEach($el => $el.addCssClass(TableSelection.className))
   }
 }
