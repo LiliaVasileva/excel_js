@@ -11,7 +11,7 @@ export class TableSelection {
     this.clear()
     this.group.push($el)
     this.current = $el
-    $el.addCssClass(TableSelection.className)
+    $el.focus().addCssClass(TableSelection.className)
   }
 
   clear() {
