@@ -10,9 +10,11 @@ import {nextSelector} from '@core/utils';
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
+      name: 'Table',
       listeners: ['mousedown', 'keydown'],
+      ...options,
     });
   }
 
@@ -26,8 +28,13 @@ export class Table extends ExcelComponent {
 
   init() {
     super.init()
+
     const $cell = this.$root.find('[data-id="0:0"]')
     this.selection.select($cell)
+
+    this.$on('formula:input', text => {
+      this.selection.current.text(text)
+    })
   }
 
   onMousedown(event) {
@@ -66,4 +73,5 @@ export class Table extends ExcelComponent {
       this.selection.select($next)
     }
   }
+
 }
