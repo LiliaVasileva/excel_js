@@ -53,7 +53,8 @@ export function resize($root, event) {
 
         resolve({
           value,
-          id: resizerType === 'col' ? $parent.data.col : null,
+          resizerType,
+          id: resizerType === 'col' ? $parent.data.col : $parent.data.row,
         })
 
         $resizer.setCss({
