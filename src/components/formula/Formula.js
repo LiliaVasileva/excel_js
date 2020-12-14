@@ -44,7 +44,7 @@ export class Formula extends ExcelComponent {
 
   onKeydown(event) {
     const keys = ['Enter', 'Tab']
-    if (keys.includes(event.keys)) {
+    if (keys.includes(event.key)) {
       event.preventDefault()
       this.$emit('formula:done')
     }
