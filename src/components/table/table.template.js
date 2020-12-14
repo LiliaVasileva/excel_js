@@ -2,10 +2,10 @@ const CODES = {
   A: 65,
   Z: 90,
 }
-const DEFAULT_WIDTH = 125
+const DEFAULT_WIDTH = '125px'
 
 function getWidth(state, index) {
-  return (state[index] || DEFAULT_WIDTH) +'px'
+  return (state[index] || DEFAULT_WIDTH)
 }
 
 function withWidthFrom(state) {
