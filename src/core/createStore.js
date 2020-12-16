@@ -16,7 +16,7 @@ export function createStore(rootReducer, initialState = {}) {
       listeners.forEach(l => l(state))
     },
     getState() {
-      return state
+      return JSON.parse(JSON.stringify(state))
     },
   }
 }
