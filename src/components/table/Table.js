@@ -6,6 +6,7 @@ import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/dom';
 import {nextSelector} from '@core/utils';
 import * as actions from '@/redux/actions';
+import {defaultStyles} from '../../constants';
 
 
 export class Table extends ExcelComponent {
@@ -42,15 +43,17 @@ export class Table extends ExcelComponent {
       this.selection.current.focus()
     })
 
-    // this.$subscribe(state => {
-    //   console.log('TableState', state)
-    // })
+    this.$on('toolbar:applyStyle', style => {
+      this.selection.applyStyle(style)
+    })
   }
 
   selectCell($cell) {
     // выделить ячейку и сообщить об этом наблюдателю
     this.selection.select($cell)
     this.$emit('table:select', $cell)
+
+    console.log($cell.getStyles(Object.keys(defaultStyles)))
   }
 
   async resizeTable(event) {
