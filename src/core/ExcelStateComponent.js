@@ -15,6 +15,7 @@ export class ExcelStateComponent extends ExcelComponent {
 
   setState(newState) {
     this.state = {...this.state, ...newState}
+    // debugger
     this.$root.html(this.template)
   }
 }
