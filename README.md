@@ -11,7 +11,7 @@ Here is a pure-JS application which provides Excel-like functionality in browser
 
 This may require updating project dependencies.
 
-### 2. Update project dependencies to fix all vulnerabilities
+### 2. Update project dependencies AND fix all vulnerabilities
 
 E.g.:
 ```bash
