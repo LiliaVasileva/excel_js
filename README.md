@@ -25,10 +25,10 @@ and format text buttons (Bold, Italic, Underline), trash bin and formula-section
 
 There are some bugs with this toolbar:
 
-1. You can enable text stile for a cell (**Bold**, *Italic*, <u>Underline</u>) but you can't disable it.
+1. You can enable text style for a cell (**Bold**, *Italic*, <u>Underline</u>) but you can't disable it.
 2. If you type text into the cell, select another cell and the return to the cell with text - 
 this text will be disappeared in the formula panel.
-3. Thrash bin button doesn't work - it's impossible to clean-up text and formatting in the table.
+3. Trash bin button doesn't work - it's impossible to clean-up text and formatting in the table.
 
 And some bug with the whole table:
 
