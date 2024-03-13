@@ -5,7 +5,7 @@
   "main": "webpack_config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack_config.js --hot --hot-only",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack_config.js --hot",
     "build": "cross-env NODE_ENV=production webpack --mode production --config webpack_config.js"
   },
   "repository": {
