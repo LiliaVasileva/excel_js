@@ -62,10 +62,10 @@ export class Table extends ExcelComponent {
   selectCell($cell) {
     // выделить ячейку и сообщить об этом наблюдателю
     this.selection.select($cell)
-    this.$emit('table:select', $cell)
+    const value = this.store.getState().dataState[this.selection.current.id()]
+    this.$emit('table:select', value)
     const styles = $cell.getStyles(Object.keys(defaultStyles))
     this.$dispatch(actions.changeStyles(styles))
-    console.log($cell.getStyles(Object.keys(defaultStyles)))
   }
 
   async resizeTable(event) {
