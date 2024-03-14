@@ -19,6 +19,7 @@ export class Table extends ExcelComponent {
     super($root, {
       name: 'Table',
       listeners: ['mousedown', 'keydown', 'input'],
+      subscribeState: ['dataState'],
       ...options,
     });
   }
@@ -33,8 +34,7 @@ export class Table extends ExcelComponent {
 
   init() {
     super.init()
-
-    const $cell = this.$root.find('[data-id="0:0"]')
+    const $cell = this.$root.find('[data-id="0:0"]')  
     this.selectCell($cell)
 
     this.$on('formula:input', value => {
@@ -66,6 +66,12 @@ export class Table extends ExcelComponent {
     this.$emit('table:select', value)
     const styles = $cell.getStyles(Object.keys(defaultStyles))
     this.$dispatch(actions.changeStyles(styles))
+  }
+
+  storeChanged(changes) {
+    if (Object.keys(changes.dataState).length === 0) {
+      this.$root.html(createTable(this.store.getState()))
+    }
   }
 
   async resizeTable(event) {
@@ -122,6 +128,10 @@ export class Table extends ExcelComponent {
   }
 
   onInput(event) {
+    this.updateTextInStore($(event.target).text())
+  }
+
+  onChange(event) {
     this.updateTextInStore($(event.target).text())
   }
 }

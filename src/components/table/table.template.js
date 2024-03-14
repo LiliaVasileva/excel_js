@@ -105,6 +105,6 @@ export function createTable(state = {}, rowsCount = 20) {
         .join('')
     rows.push(createRow(row + 1, cells, state.rowState))
   }
-
+  
   return rows.join('')
 }

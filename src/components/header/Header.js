@@ -1,7 +1,7 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {$} from '../../core/dom';
-import {changeTitle} from '../../redux/actions';
-import {defaultTitle} from '../../constants';
+import {changeTitle, resetState} from '../../redux/actions';
+import {createHeader} from './header.template';
 
 export class Header extends ExcelComponent {
   static className = 'excel__header'
@@ -9,30 +9,29 @@ export class Header extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Header',
-      listeners: ['input'],
+      listeners: ['input', 'click'],
       ...options,
     });
   }
+
+  get template() {
+    return createHeader(this.store.getState().title)
+  }
+
   toHTML() {
-    const title = this.store.getState().title || defaultTitle
-    return `
-      <input type="text" class="input" value="${title}"/>
-
-        <div>
-
-            <div class="button">
-                <i class="material-icons">delete</i>
-            </div>
-            <div class="button">
-                <i class="material-icons">exit_to_app</i>
-            </div>
-
-        </div>
-    `
+    return this.template
   }
 
   onInput(event) {
     const $target = $(event.target)
     this.$dispatch(changeTitle($target.text()))
+  }
+
+  onClick(event) {
+    const $target = $(event.target)
+    const value = JSON.parse($target.data.value)
+    if (value === 'delete') {
+      this.$dispatch(resetState())
+    }
   }
 }

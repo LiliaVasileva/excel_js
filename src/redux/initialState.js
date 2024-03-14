@@ -1,7 +1,7 @@
 import {storage} from '@core/utils';
 import {defaultStyles, defaultTitle} from '../constants';
 
-const defaultState = {
+export const defaultState = {
   title: defaultTitle,
   rowState: {},
   colState: {},
