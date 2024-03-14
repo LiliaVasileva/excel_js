@@ -1,3 +1,4 @@
+import {$} from '@core/dom';
 export class TableSelection {
   static className = 'selected'
 
@@ -32,5 +33,26 @@ export class TableSelection {
 
   applyStyle(style) {
     this.group.forEach($el => $el.setCss(style))
+  }
+
+  selectRow($row) {
+    this.clear();
+    const $cells = Array.from($row.$el.querySelectorAll('[data-type="cell"]'));
+    this.group = $cells.map(el => $(el));
+    this.group.forEach($el => $el.addCssClass(TableSelection.className));
+  }
+  
+
+  selectColumn(colIndex, $rows) {
+    this.clear()
+    const rowsArray = Array.from($rows);
+    rowsArray.forEach(row => {
+      const $cells = Array.from(row.querySelectorAll('.cell'));
+      if ($cells.length > colIndex) {
+        const $cell = $($cells[colIndex]);
+        this.group.push($cell);
+        $cell.addCssClass(TableSelection.className);
+      }
+    });
   }
 }

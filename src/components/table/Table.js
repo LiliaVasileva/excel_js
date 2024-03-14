@@ -18,7 +18,7 @@ export class Table extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown', 'input'],
+      listeners: ['mousedown', 'keydown', 'input', 'click'],
       subscribeState: ['dataState'],
       ...options,
     });
@@ -133,5 +133,17 @@ export class Table extends ExcelComponent {
 
   onChange(event) {
     this.updateTextInStore($(event.target).text())
+  }
+
+  onClick(event) {
+    const $target = $(event.target);
+    if (event.target.className === 'row-info') {
+      const $row = $target.closest('.row');
+      this.selection.selectRow($row)
+    } else if (event.target.className === 'column') {
+      const columnIndex = parseInt($target.data['col']);
+      const $rows = $target.closest('.excel__table').findAll(`.row`)
+      this.selection.selectColumn(columnIndex, $rows );
+    } 
   }
 }
