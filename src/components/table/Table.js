@@ -112,11 +112,13 @@ export class Table extends ExcelComponent {
 
     const {key} = event
 
-    if (keys.includes(key) && !event.shiftKey) {
+    if (keys.includes(key) && event.shiftKey  
+    || 
+    keys.includes(key) && event.ctrlKey ) {
       event.preventDefault()
       const id = this.selection.current.id(true)
       const $next = this.$root.find(nextSelector(key, id))
-      this.selectCell($next)
+      this.selection.multipleSelect($next)
     }
   }
 

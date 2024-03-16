@@ -14,6 +14,12 @@ export class TableSelection {
     $el.focus().addCssClass(TableSelection.className)
   }
 
+  multipleSelect($el) {
+    this.group.push($el)
+    this.current = $el
+    $el.focus().addCssClass(TableSelection.className)
+  }
+
   clear() {
     this.group.forEach(($el => $el.removeCssClass(TableSelection.className)))
     this.group = []
