@@ -18,10 +18,11 @@ export class Table extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown', 'input', 'click'],
+      listeners: ['mousedown', 'keydown', 'input', 'click', 'copy', 'paste'],
       subscribeState: ['dataState'],
       ...options,
     });
+    this.selectedCells = [];
   }
 
   prepare() {
@@ -125,6 +126,36 @@ export class Table extends ExcelComponent {
     }
   }
 
+  onCopy(event) {
+    const values = this.selection.group.map($cell => $cell.text());
+    const clipboardData = event.clipboardData || window.clipboardData;
+    this.selectedCells = this.selection.group
+    clipboardData.setData('text', values.join('\n'));
+    event.preventDefault();
+  }
+
+  onPaste(event) {
+    const clipboardData = event.clipboardData || window.clipboardData;
+    const pastedValues = clipboardData.getData('text').split('\n');
+
+    const target = this.selection.current.id(true);
+
+
+    this.selectedCells.forEach(($cell, index) => {
+      const row = target.row + index;
+      pastedValues[index].split('\t').forEach((value, colIndex) => {
+        const col = target.col + colIndex;
+        const $targetCell = this.$root.find(`[data-id="${row}:${col}"]`);
+        this.selectCell($targetCell)
+        this.updateTextInStore(value, $targetCell);
+      });
+    });
+
+    this.$root.html(createTable(this.store.getState()))
+    event.preventDefault();
+  }
+
+  
   updateTextInStore(value) {
     this.$dispatch(actions.changeText({
       id: this.selection.current.id(),
