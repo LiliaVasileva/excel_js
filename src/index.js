@@ -19,6 +19,7 @@ const stateListener = debounce( state => {
 store.subscribe(stateListener)
 
 const excel = new Excel('#app', {
+  
   components: [Header, Toolbar, Formula, Table],
   store,
 })

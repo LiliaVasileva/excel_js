@@ -92,6 +92,10 @@ export class Table extends ExcelComponent {
       if (event.shiftKey) {
         const target = $target.id(true)
         const current = this.selection.current.id(true)
+        console.log('-------target----')
+        console.log(target)
+        console.log('-------Current----')
+        console.log(current)
         const $cells = matrix(target, current)
             .map(id => this.$root.find(`[data-id="${id}"]`))
         this.selection.selectGroup($cells)
@@ -140,7 +144,6 @@ export class Table extends ExcelComponent {
 
     const target = this.selection.current.id(true);
 
-
     this.selectedCells.forEach(($cell, index) => {
       const row = target.row + index;
       pastedValues[index].split('\t').forEach((value, colIndex) => {
@@ -155,7 +158,6 @@ export class Table extends ExcelComponent {
     event.preventDefault();
   }
 
-  
   updateTextInStore(value) {
     this.$dispatch(actions.changeText({
       id: this.selection.current.id(),
